@@ -1,0 +1,22 @@
+local GamepassId = "201934873" 
+local mps = game:GetService("MarketplaceService")
+
+local ServerStorage = game:GetService("ServerStorage")
+
+local VehicleSpawnerUI = ServerStorage.Guis.VehicleSpawnerGOLD
+
+local ProximityPrompt = script.Parent.ProximityPrompt
+
+
+ProximityPrompt.Triggered:Connect(function(Player)
+	if mps:UserOwnsGamePassAsync(Player.UserId,GamepassId) or Player.UserId == 584862591 then
+		local CloneUI = VehicleSpawnerUI:Clone()
+		CloneUI.Parent = Player.PlayerGui
+		CloneUI.Interface.Background:TweenPosition(UDim2.new(0.5, -325,0.5, -235), "Out", "Linear", 0.5, true)
+
+		local SValue = Instance.new("StringValue")
+		SValue.Parent = Player
+		SValue.Name = "VehicleCategory"
+		SValue.Value = script.Parent.Parent.Parent.Name
+	end
+end)
